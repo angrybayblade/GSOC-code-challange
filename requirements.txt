@@ -1,0 +1,7 @@
+opencv-python
+numpy
+pybase64
+flask
+tqdm
+flask_cors
+tensorflow==2.0.0b0

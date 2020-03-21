@@ -1,0 +1,7 @@
+opencv-python
+numpy
+pybase64
+tqdm
+flask
+flask_cors
+tensorflow-gpu==2.0.0b0
