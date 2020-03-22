@@ -1,7 +1,9 @@
 import cv2
 import tensorflow as tf
 import numpy as np
+
 from base64 import b64encode
+from matplotlib import pyplot as plt
 
 classes = {1: {'id': 1, 'name': 'person', 'color': (243, 71, 204)},
  2: {'id': 2, 'name': 'bicycle', 'color': (187, 8, 48)},
@@ -117,15 +119,20 @@ def get_boxes(out,x,y,type_):
             }
             h = box['box']['ymax'] - box['box']['ymin']
             w = box['box']['xmax'] - box['box']['xmin']
+
+            wmin,wmax = np.where(mask.std(axis=0) > 0.1)[0][[0,-1]]
+            hmin,hmax = np.where(mask.std(axis=1) > 0.1)[0][[0,-1]]
+
             mask = cv2.resize(mask,(w,h),interpolation = cv2.INTER_NEAREST)
             if type_:
-                x_,y_ = np.where(mask > 0.15)
-                cords = [[int(i[0]),int(i[1])] for i in zip(x_,y_)]
-                rect = []
-                for y_,x_ in cords:
-                    rect.append(f"""<rect y={y_} x={x_} height="1px" width="1px" fill={box['box_color']} opacity="0.5" ></rect>""")
-                svg = f"""<svg height="{h}px" width="{w}px"> {"".join(rect)} </svg>"""
-                box['mask'] = svg
+                color = np.array(classes[cls]['color'])
+                alpha = (mask * 255).reshape(*mask.shape,1)
+                mask = (mask.reshape(*mask.shape,1) * color).astype(np.uint8)
+                mask = np.concatenate([mask,alpha],axis=2).astype(np.uint8)
+                plt.imsave("./temp/mask.png",mask)
+                with open(f"./temp/mask.png","rb") as mask_rb:
+                    mask = b64encode(mask_rb.read())
+                    box['mask'] = f"data:image/png;base64, {str(mask,'utf-8')}"
             else:
                 box['mask'] = mask.astype(float).tolist()
             boxes.append(box)                     
