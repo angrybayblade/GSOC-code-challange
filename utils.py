@@ -127,7 +127,7 @@ def get_boxes(out,x,y,type_):
                 svg = f"""<svg height="{h}px" width="{w}px"> {"".join(rect)} </svg>"""
                 box['mask'] = svg
             else:
-                box['mask'] = mask.astype(int).tolist()
+                box['mask'] = mask.astype(float).tolist()
             boxes.append(box)                     
             clss.append(int(cls))
     clss = [
