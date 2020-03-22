@@ -102,7 +102,7 @@ And It Will return JSON object as following
 
 Response will we a JSON String. Return Values Will Be As Following 
 
-+ Filename (String):
++ filename (String):
   +  Path Of the uploaded file on server.
 
 + height (Integer):
@@ -114,5 +114,17 @@ Response will we a JSON String. Return Values Will Be As Following
 + name (String):
   + Name Of the uploaded file.
 
++ boxes (Array): 
+  + Array Containing Detected Objects.
+    + box (Dictionary)
+      + Dictionary containing co-ordinates of detected object.
+    + box_color (String)
+      + A unique color assigned to the object class.
+    + mask (Array)
+      + A 2-dimentional array containing mask for detected object.
+    + class (String)
+      + Name Of The detected class.
+    + score (Floating Point Number)
+      + Score of the detection class.
 
 **Note** : Use type=1 in request when you want the JPEG file as BASE64 string in Response
