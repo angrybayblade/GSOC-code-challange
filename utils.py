@@ -98,7 +98,7 @@ def get_image(path):
     input_tensor = input_tensor[tf.newaxis,...]
     return input_tensor,image
 
-def get_boxes(out,x,y):
+def get_boxes(out,x,y,type_):
     boxes = []
     clss = []
     for box,cls,mask,score in zip(*[out[i][0] for i in sorted(out.keys())]):
@@ -118,13 +118,16 @@ def get_boxes(out,x,y):
             h = box['box']['ymax'] - box['box']['ymin']
             w = box['box']['xmax'] - box['box']['xmin']
             mask = cv2.resize(mask,(w,h),interpolation = cv2.INTER_NEAREST)
-            x_,y_ = np.where(mask > 0.15)
-            cords = [[int(i[0]),int(i[1])] for i in zip(x_,y_)]
-            rect = []
-            for y_,x_ in cords:
-                rect.append(f"""<rect y={y_} x={x_} height="1px" width="1px" fill={box['box_color']} opacity="0.5" ></rect>""")
-            svg = f"""<svg height="{h}px" width="{w}px"> {"".join(rect)} </svg>"""
-            box['mask'] = svg
+            if type_:
+                x_,y_ = np.where(mask > 0.15)
+                cords = [[int(i[0]),int(i[1])] for i in zip(x_,y_)]
+                rect = []
+                for y_,x_ in cords:
+                    rect.append(f"""<rect y={y_} x={x_} height="1px" width="1px" fill={box['box_color']} opacity="0.5" ></rect>""")
+                svg = f"""<svg height="{h}px" width="{w}px"> {"".join(rect)} </svg>"""
+                box['mask'] = svg
+            else:
+                box['mask'] = mask.astype(int).tolist()
             boxes.append(box)                     
             clss.append(int(cls))
     clss = [

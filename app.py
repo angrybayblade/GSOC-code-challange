@@ -28,13 +28,14 @@ def predict():
     image = request.files['image']
     name = image.filename
     image.save(f"./temp/{name}")
+    type_ = int(request.form['type'])
 
     tensor,image = get_image(f"./temp/{name}")
     y,x,c = image.shape
     predictions = get_pred(tensor,model)
-    boxes,classes = get_boxes(predictions,x,y)
+    boxes,classes = get_boxes(predictions,x,y,type_)
 
-    if int(request.form['type']):
+    if type_:
         image_data = None
         with open(f"./temp/{name}","rb") as image_rb:
             image_data = b64encode(image_rb.read())

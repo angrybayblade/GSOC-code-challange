@@ -1,0 +1,44 @@
+{
+    "boxes": [
+        {
+            "box": {
+                "xmax": 217,
+                "xmin": 121,
+                "ymax": 452,
+                "ymin": 384
+            },
+            "box_color": "#0edd6c",
+            "class": "dog",
+            "mask":[[],[],[]],
+            "score": 0.9936468601226807
+        },
+        {
+            "box": {
+                "xmax": 102,
+                "xmin": 58,
+                "ymax": 194,
+                "ymin": 125
+            },
+            "box_color": "#09bdd2",
+            "class": "clock",
+            "mask":[[],[],[]],
+            "score": 0.9722564220428467
+        },
+        {
+            "box": {
+                "xmax": 354,
+                "xmin": 218,
+                "ymax": 443,
+                "ymin": 276
+            },
+            "box_color": "#cb55ed",
+            "class": "potted plant",
+            "mask":[[],[],[]],
+            "score": 0.8766565322875977
+        }
+    ],
+    "filename": "./temp/6.jpg",
+    "height": 479,
+    "name": "6.jpg",
+    "width": 639
+}

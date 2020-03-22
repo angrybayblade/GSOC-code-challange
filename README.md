@@ -55,45 +55,64 @@ And It Will return JSON object as following
 
 ```json
 {
-    "boxes":[
+    "boxes": [
         {
-            "class":"Car",
-            "score":0.9998185038566589,
-            "xmax":604,
-            "xmin":488,
-            "ymax":336,
-            "ymin":255
+            "box": {
+                "xmax": 217,
+                "xmin": 121,
+                "ymax": 452,
+                "ymin": 384
+            },
+            "box_color": "#0edd6c",
+            "class": "dog",
+            "mask":[[],[],[]],
+            "score": 0.9936468601226807
         },
         {
-            "class":"Tree",
-            "score":0.962854266166687,
-            "xmax":284,
-            "xmin":178,
-            "ymax":408,
-            "ymin":339
+            "box": {
+                "xmax": 102,
+                "xmin": 58,
+                "ymax": 194,
+                "ymin": 125
+            },
+            "box_color": "#09bdd2",
+            "class": "clock",
+            "mask":[[],[],[]],
+            "score": 0.9722564220428467
         },
         {
-            "class":"Bird",
-            "score":0.9942442774772644,
-            "xmax":236,
-            "xmin":48,
-            "ymax":74,
-            "ymin":2
-        },
-        {
-            "class":"Ship",
-            "score":0.9564193487167358,
-            "xmax":86,
-            "xmin":4,
-            "ymax":191,
-            "ymin":136
+            "box": {
+                "xmax": 354,
+                "xmin": 218,
+                "ymax": 443,
+                "ymin": 276
+            },
+            "box_color": "#cb55ed",
+            "class": "potted plant",
+            "mask":[[],[],[]],
+            "score": 0.8766565322875977
         }
     ],
-    "filename":"./temp/BloodImage_00001.jpg",
-    "height":480,
-    "width":640,
-    "name":"BloodImage_00001.jpg"
+    "filename": "./temp/6.jpg",
+    "height": 479,
+    "name": "6.jpg",
+    "width": 639
 }
 ```
+
+Response will we a JSON String. Return Values Will Be As Following 
+
++ Filename (String):
+  +  Path Of the uploaded file on server.
+
++ height (Integer):
+  +  height of the uploaded file.
+
++ width (Integer): 
+  + width of the uploaded file.
+  
++ name (String):
+  + Name Of the uploaded file.
+
 
 **Note** : Use type=1 in request when you want the JPEG file as BASE64 string in Response
